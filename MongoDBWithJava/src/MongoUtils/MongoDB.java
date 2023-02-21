@@ -14,7 +14,7 @@ public class MongoDB {
         this.databaseName = databaseName;
         this.collections = new HashMap<>();
         //Creates a folder in the Databases package with the name as provided by the user
-        String pathName = "/Users/kkariwala/Desktop/Aspire InfoLabs/OOPS Concepts/Java_Assignment_OOPS/MongoDBWithJava/Databases/";
+        String pathName = "/Users/kkariwala/Desktop/Aspire InfoLabs/MongoDBCloneJava/MongoDBWithJava/Databases/";
         this.pathOfDatabase = pathName+databaseName + "/";
         System.out.println(pathOfDatabase);
         MakeFolder.makeFolder(pathName,databaseName);
