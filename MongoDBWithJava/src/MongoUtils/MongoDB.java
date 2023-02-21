@@ -7,9 +7,13 @@ import java.util.HashMap;
 
 
 public class MongoDB {
-    private String databaseName;
-    HashMap<String,CollectionClass> collections;
-    private String pathOfDatabase;
+    private String databaseName; //Stores the name of the database
+    HashMap<String,CollectionClass> collections; //Stores all collections available in the current database
+    private String pathOfDatabase; //stores the path of the database
+
+    /**
+     * Class constructor specifying name of the database.
+     */
     public MongoDB(String databaseName){
         this.databaseName = databaseName;
         this.collections = new HashMap<>();
@@ -19,6 +23,17 @@ public class MongoDB {
         System.out.println(pathOfDatabase);
         MakeFolder.makeFolder(pathName,databaseName);
     }
+
+    /**
+     * This method creates a collection for a specific MongoDB object and stores it in th HashMap
+     * If the collection exists, it will throw an error and not create a new Collection
+     * else if will create
+     *
+     * @param  collectionName name of the collection to be created
+     * @return void
+     * @see MongoDB
+     * @see CollectionClass
+     */
     public void createCollection(String collectionName){
         //create a collection in that database directory of this name, i.e. create a JSON File.
 
@@ -33,6 +48,16 @@ public class MongoDB {
         CreateFile.createFile(pathOfDatabase + collectionName + ".json");
     }
 
+    /**
+     * This method deletes a collection for a specific MongoDB object and also deletes it from the HashMap
+     * If the collection does not exist, it will throw an error and will not try to delete that collection
+     * else it will delete
+     *
+     * @param  collectionName name of the collection to be deleted
+     * @return void
+     * @see MongoDB
+     * @see CollectionClass
+     */
     public void deleteCollection(String collectionName){
         //create a collection in that database directory of this name, i.e. create a JSON File.
 
@@ -46,6 +71,20 @@ public class MongoDB {
         DeleteFile.deleteFile(pathOfDatabase,collectionName + ".json");
     }
 
+
+    /**
+     * This method adds an JSONObject to a collection for a specific MongoDB object
+     * If the collection does not exist, it will throw an error and will not try to add to that collection
+     * else it will add
+     *
+     * @param  collectionName name of the collection to be added to
+     * @param key String key of the key-value pair where the value is the object
+     * @param j JSONObjectSelf value for the key-value pair
+     * @return void
+     * @see MongoDB
+     * @see CollectionClass
+     * @see JSONObjectSelf
+     */
     public void addToCollection(String collectionName, String key,JSONObjectSelf j){
         if(!collections.containsKey(collectionName)){
             System.out.println("This collection does not exist, cannot add to it!");
@@ -55,6 +94,19 @@ public class MongoDB {
         collections.get(collectionName).addObjectToCollection(key,j);
     }
 
+
+    /**
+     * This method deletes an JSONObject from a collection for a specific MongoDB object
+     * If the collection does not exist, it will throw an error and will not try to delete from that collection
+     * else it will delete
+     *
+     * @param  collectionName name of the collection to be deleted from
+     * @param key String key of the key-value pair where the value is the object
+     * @return void
+     * @see MongoDB
+     * @see CollectionClass
+     * @see JSONObjectSelf
+     */
     public void deleteObjectFromCollection(String collectionName, String key){
         if(!collections.containsKey(collectionName)){
             System.out.println("This collection does not exist, cannot delete from it!");
@@ -64,6 +116,14 @@ public class MongoDB {
         collections.get(collectionName).deleteObjectFromCollection(key);
     }
 
+    /**
+     * This method prints all the names of collections created for a specific MongoDB object
+     *
+     * @return void
+     * @see MongoDB
+     * @see CollectionClass
+     * @see JSONObjectSelf
+     */
     public void printAllCollections(){
         System.out.println("All Available Collections in the database " + databaseName + " are :-");
         int i = 1;
@@ -72,32 +132,5 @@ public class MongoDB {
             System.out.println(i + ": " + name);
             i++;
         }
-    }
-
-    public static void main(String[] args) {
-        MongoDB m1 = new MongoDB("kunal");
-        m1.createCollection("persons");
-//        m1.deleteCollection("persons");
-        JSONObject j1 = new JSONObject();
-        j1.put("salary",  Double.valueOf(23000.45));
-        j1.put("pronouns","he/him");
-        j1.put("nationality","Indian");
-        JSONObjectSelf js1 = new JSONObjectSelf(j1);
-        JSONObject j2 = new JSONObject();
-        j2.put("salary",  Double.valueOf(23002.45));
-        j2.put("pronouns","they/them");
-        j2.put("nationality","Indian");
-        JSONObjectSelf js2 = new JSONObjectSelf(j2);
-        JSONObject j3 = new JSONObject();
-        j3.put("salary",  Double.valueOf(23004343.45));
-        j3.put("pronouns","she/her");
-        j3.put("nationality","Indian");
-        JSONObjectSelf js3 = new JSONObjectSelf(j3);
-        m1.addToCollection("persons","kunal",js1);
-        m1.addToCollection("persons","hardik",js2);
-        m1.addToCollection("persons","janvi",js3);
-        m1.createCollection("departments");
-        m1.deleteObjectFromCollection("persons","hardik");
-        m1.printAllCollections();
     }
 }

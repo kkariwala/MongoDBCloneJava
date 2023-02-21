@@ -1,6 +1,15 @@
 package FileOperationUtils;
+import MongoUtils.JSONObjectSelf;
+
 import java.io.File;
 public class DeleteFile {
+    /**
+     * This method deletes a file from the file Path
+     *
+     * @param filePath Absolute path of the JSON file excluding the name
+     * @param fileName name of the file to be deleted
+     * @return void
+     */
     public static void deleteFile(String filePath,String fileName){
         try {
             // Creating an object of a file

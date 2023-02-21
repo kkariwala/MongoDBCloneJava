@@ -1,9 +1,17 @@
 package FileOperationUtils;
 // Importing File class
+import MongoUtils.JSONObjectSelf;
+
 import java.io.File;
 // Importing the IOException class for handling errors
 import java.io.IOException;
 public class CreateFile {
+    /**
+     * This method creates a file
+     *
+     * @param filePathName Absolute path of the JSON file including the name
+     * @return void
+     */
     public static void createFile(String filePathName){
         try {
             // Creating an object of a file

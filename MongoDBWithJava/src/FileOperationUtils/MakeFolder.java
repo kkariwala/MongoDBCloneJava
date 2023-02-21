@@ -2,6 +2,13 @@ package FileOperationUtils;
 // Importing File class
 import java.io.File;
 public class MakeFolder {
+    /**
+     * This method creates a folder with the name in the given path
+     *
+     * @param filePathName Absolute path of the folder excluding the name
+     * @param databaseName name of the folder to be deleted
+     * @return void
+     */
     public static void makeFolder(String filePathName,String databaseName){
         try {
             // Creating an object of a file

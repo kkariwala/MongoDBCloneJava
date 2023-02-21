@@ -1,16 +1,24 @@
 package FileOperationUtils;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.stream.Stream;
 
+import MongoUtils.JSONObjectSelf;
+import MongoUtils.MongoDB;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class DeleteFromJSON {
+    /**
+     * This method deletes an Object from a JSON file and handles exceptions
+     *
+     * @param filePath Absolute path of the JSON file
+     * @param objectId Identification for the oject to be deleted
+     * @return void
+     * @see MongoDB
+     * @see JSONObjectSelf
+     */
     public static void deleteObjectFromJSON(String filePath, String objectId){
         try (FileReader fileReader = new FileReader(filePath)) {
             JSONParser jsonParser = new JSONParser();

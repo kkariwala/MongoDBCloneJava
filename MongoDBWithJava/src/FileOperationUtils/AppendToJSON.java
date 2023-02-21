@@ -10,6 +10,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class AppendToJSON {
+    /**
+     * This method appends an Object to a non-empty JSON file and handles exceptions
+     *
+     * @param path Absolute path of the JSON file
+     * @param key key for the key value pair
+     * @param j the object that forms the value of the key-value pair
+     * @return void
+     * @see JSONObjectSelf
+     */
     public static void appendToJSON(String path, String key, JSONObjectSelf j){
         JSONParser parser = new JSONParser();
         try {
